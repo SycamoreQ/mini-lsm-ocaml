@@ -1,0 +1,4 @@
+(lang dune 3.20)
+(name mini-lsm)
+(sections (lib .) (bin ../../bin))
+(files (lib (META dune-package opam)) (bin (mini-lsm)))

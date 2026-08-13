@@ -1,0 +1,6 @@
+(library
+ (name lsm_vec)
+ (wrapped true)
+ (libraries base stdint)
+ (modules
+  memtable))

@@ -1,0 +1,4 @@
+(executable
+ (public_name mini-lsm)
+ (name main)
+ (libraries mini_lsm))

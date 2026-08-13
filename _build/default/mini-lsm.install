@@ -1,0 +1,8 @@
+lib: [
+  "_build/install/default/lib/mini-lsm/META"
+  "_build/install/default/lib/mini-lsm/dune-package"
+  "_build/install/default/lib/mini-lsm/opam"
+]
+bin: [
+  "_build/install/default/bin/mini-lsm"
+]

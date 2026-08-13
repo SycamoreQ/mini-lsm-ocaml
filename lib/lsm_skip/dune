@@ -1,0 +1,6 @@
+(library
+ (name lsm_skip)
+ (wrapped true)
+ (libraries base threads.posix)
+ (modules
+  skiplist))
