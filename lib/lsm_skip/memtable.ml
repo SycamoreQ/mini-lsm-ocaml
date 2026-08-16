@@ -87,6 +87,78 @@ let recover_from_wal (id : int) (path : _ Eio.Path.t) : (t, Wal.error) result =
       in
       Ok { map; wal = None; id; approximate_size }
 
+let put_uint32_be (buf : Buffer.t) (n : int) : unit =
+  Buffer.add_char buf (Char.chr ((n lsr 24) land 0xff));
+  Buffer.add_char buf (Char.chr ((n lsr 16) land 0xff));
+  Buffer.add_char buf (Char.chr ((n lsr 8) land 0xff));
+  Buffer.add_char buf (Char.chr (n land 0xff))
+
+let encode_record (key : bytes) (value : bytes) : bytes =
+  let buf = Buffer.create (8 + Bytes.length key + Bytes.length value) in
+  put_uint32_be buf (Bytes.length key);
+  Buffer.add_bytes buf key;
+  put_uint32_be buf (Bytes.length value);
+  Buffer.add_bytes buf value;
+  Buffer.to_bytes buf
+
 
 let get (t: t) (key: bytes): bytes option =
   Skiplist.get t.map key
+
+let put (t : t) (key : bytes) (value : bytes) : (unit, Wal.error) result =
+  Skiplist.insert t.map key value;
+  t.approximate_size <- t.approximate_size + Bytes.length key + Bytes.length value;
+  match t.wal with
+  | None -> Ok ()
+  | Some wal -> Wal.append_bytes wal (encode_record key value)
+
+
+let sync_wal (t : t) : (unit, Wal.error) result =
+  match t.wal with
+  | None -> Ok ()
+  | Some wal -> Wal.sync wal
+
+module Iterator = struct
+  type t = {
+    mutable seq : (bytes * bytes) Seq.t;
+    mutable current : (bytes * bytes) option;
+  }
+
+  let is_valid (it : t) : bool = Option.is_some it.current
+
+  let key (it : t) : bytes =
+    match it.current with
+    | Some (k, _) -> k
+    | None -> invalid_arg "Iterator.key: iterator is not valid"
+
+  let value (it : t) : bytes =
+    match it.current with
+    | Some (_, v) -> v
+    | None -> invalid_arg "Iterator.value: iterator is not valid"
+
+  let next (it : t) : unit =
+    match it.seq () with
+    | Seq.Nil -> it.current <- None
+    | Seq.Cons (item, rest) ->
+      it.current <- Some item;
+      it.seq <- rest
+end
+
+let scan (t : t) ~(lower : bytes Skiplist.bound) ~(upper : bytes Skiplist.bound) : Iterator.t =
+  let seq = Skiplist.range t.map ~lower ~upper in
+  match seq () with
+  | Seq.Nil -> { Iterator.seq = Seq.empty; current = None }
+  | Seq.Cons (item, rest) -> { Iterator.seq = rest; current = Some item }
+
+let flush (_t : t) (_builder : 'a) : (unit, Wal.error) result =
+  failwith "flush: not implemented (week 1, day 6 — needs SsTableBuilder)"
+
+let put_batch (t: t) (key: bytes) (value: bytes): (unit, Wal.error) result =
+  let data =
+
+
+let id (t : t) : int = t.id
+
+let approximate_size (t : t) : int = t.approximate_size
+
+let is_empty (t : t) : bool = Skiplist.is_empty t.map

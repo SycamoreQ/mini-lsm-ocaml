@@ -108,3 +108,29 @@ let to_seq t : ('k * 'v) Seq.t =
     | Some node -> Seq.Cons ((node.key, node.value), go node.forward.(0))
   in
   go t.header.(0)
+
+
+type 'k bound = Included of 'k | Excluded of 'k | Unbounded
+
+let range t ~(lower : 'k bound) ~(upper : 'k bound) : ('k * 'v) Seq.t =
+  let start_node =
+    match lower with
+    | Unbounded -> t.header.(0)
+    | Included key -> candidate_after t (find_predecessors t key)
+    | Excluded key -> (
+      match candidate_after t (find_predecessors t key) with
+      | Some node when t.compare node.key key = 0 -> node.forward.(0)
+      | other -> other)
+  in
+  let within_upper node =
+    match upper with
+    | Unbounded -> true
+    | Included key -> t.compare node.key key <= 0
+    | Excluded key -> t.compare node.key key < 0
+  in
+  let rec go node () =
+    match node with
+    | Some n when within_upper n -> Seq.Cons ((n.key, n.value), go n.forward.(0))
+    | _ -> Seq.Nil
+  in
+  go start_node
