@@ -1,0 +1,7 @@
+(test
+  (name test_skip_concurrent_skip)
+  (libraries lsm_skip alcotest memtrace))
+
+(test
+  (name stress_test)
+  (libraries lsm_skip alcotest memtrace))

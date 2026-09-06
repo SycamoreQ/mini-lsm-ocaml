@@ -1,6 +1,7 @@
 (library
  (name lsm_skip)
  (wrapped true)
- (libraries base threads.posix)
+ (libraries base threads.posix memtrace)
  (modules
-  skiplist))
+  skiplist
+  concurrent_skip))

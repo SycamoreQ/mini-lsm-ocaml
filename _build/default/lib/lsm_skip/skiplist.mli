@@ -25,3 +25,9 @@ val iter : ('k, 'v) t -> ('k -> 'v -> unit) -> unit
 
 (** Returns a lazy sequence of the entries in ascending key order. *)
 val to_seq : ('k, 'v) t -> ('k * 'v) Seq.t
+
+(** Represents a boundary for range queries. *)
+type 'k bound = Included of 'k | Excluded of 'k | Unbounded
+
+(** Returns a lazy sequence of entries within the specified key range. *)
+val range : ('k, 'v) t -> lower:'k bound -> upper:'k bound -> ('k * 'v) Seq.t

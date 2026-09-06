@@ -1,6 +1,16 @@
-# /Users/kaushikmuthukumar/.opam/5.1.1/bin/dune pkg enabled --root /Users/kaushikmuthukumar/Documents/projects/mini_lsm
+# dune exec lib/lsm_skip/test/test_skip_concurrent_skip.exe
 # OCAMLPARAM: unset
 # Shared cache: enabled-except-user-rules
 # Shared cache location: /Users/kaushikmuthukumar/.cache/dune/db
 # Workspace root: /Users/kaushikmuthukumar/Documents/projects/mini_lsm
 # Auto-detected concurrency: 10
+# Dune context:
+#  { name = "default"
+#  ; kind = "default"
+#  ; profile = Dev
+#  ; merlin = true
+#  ; fdo_target_exe = None
+#  ; build_dir = In_build_dir "default"
+#  ; instrument_with = []
+#  }
+$ /Users/kaushikmuthukumar/.opam/5.1.1/bin/ocamlc.opt -config > /var/folders/by/5fxkk00x0777y8jv99x1h2440000gn/T/dune_e2e133_output
