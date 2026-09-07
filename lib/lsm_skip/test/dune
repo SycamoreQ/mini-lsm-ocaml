@@ -2,6 +2,6 @@
   (name test_skip_concurrent_skip)
   (libraries lsm_skip alcotest memtrace))
 
-(test
+(executable
   (name stress_test)
-  (libraries lsm_skip alcotest memtrace))
+  (libraries lsm_skip threads.posix))
