@@ -5,3 +5,8 @@
 (executable
   (name stress_test)
   (libraries lsm_skip threads.posix))
+
+
+(executable
+  (name dscheck_conc_skip)
+  (libraries lsm_skip dscheck))

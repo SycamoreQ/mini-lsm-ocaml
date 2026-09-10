@@ -1,6 +1,19 @@
-# /Users/kaushikmuthukumar/.opam/5.1.1/bin/dune pkg enabled --root /Users/kaushikmuthukumar/Documents/projects/mini_lsm
+# dune exec lib/lsm_skip/test/dscheck_conc_skip.exe
 # OCAMLPARAM: unset
 # Shared cache: enabled-except-user-rules
 # Shared cache location: /Users/kaushikmuthukumar/.cache/dune/db
 # Workspace root: /Users/kaushikmuthukumar/Documents/projects/mini_lsm
 # Auto-detected concurrency: 10
+# Dune context:
+#  { name = "default"
+#  ; kind = "default"
+#  ; profile = Dev
+#  ; merlin = true
+#  ; fdo_target_exe = None
+#  ; build_dir = In_build_dir "default"
+#  ; instrument_with = []
+#  }
+$ /Users/kaushikmuthukumar/.opam/5.1.1/bin/ocamlc.opt -config > /var/folders/by/5fxkk00x0777y8jv99x1h2440000gn/T/dune_4ff5cf_output
+$ (cd _build/default && /Users/kaushikmuthukumar/.opam/5.1.1/bin/ocamldep.opt -modules -impl lib/lsm_skip/test/dscheck_conc_skip.ml) > _build/default/lib/lsm_skip/test/.dscheck_conc_skip.eobjs/dune__exe__Dscheck_conc_skip.impl.d
+$ (cd _build/default && /Users/kaushikmuthukumar/.opam/5.1.1/bin/ocamlopt.opt -w @1..3@5..28@31..39@43@46..47@49..57@61..62@67@69-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -I lib/lsm_skip/test/.dscheck_conc_skip.eobjs/byte -I lib/lsm_skip/test/.dscheck_conc_skip.eobjs/native -I /Users/kaushikmuthukumar/.opam/5.1.1/lib/base -I /Users/kaushikmuthukumar/.opam/5.1.1/lib/base/base_internalhash_types -I /Users/kaushikmuthukumar/.opam/5.1.1/lib/base/shadow_stdlib -I /Users/kaushikmuthukumar/.opam/5.1.1/lib/containers -I /Users/kaushikmuthukumar/.opam/5.1.1/lib/containers/domain -I /Users/kaushikmuthukumar/.opam/5.1.1/lib/containers/monomorphic -I /Users/kaushikmuthukumar/.opam/5.1.1/lib/dscheck -I /Users/kaushikmuthukumar/.opam/5.1.1/lib/either -I /Users/kaushikmuthukumar/.opam/5.1.1/lib/memtrace -I /Users/kaushikmuthukumar/.opam/5.1.1/lib/ocaml/threads -I /Users/kaushikmuthukumar/.opam/5.1.1/lib/ocaml/unix -I /Users/kaushikmuthukumar/.opam/5.1.1/lib/ocaml_intrinsics_kernel -I /Users/kaushikmuthukumar/.opam/5.1.1/lib/oseq -I /Users/kaushikmuthukumar/.opam/5.1.1/lib/sexplib0 -I lib/lsm_skip/.lsm_skip.objs/byte -I lib/lsm_skip/.lsm_skip.objs/native -cmi-file lib/lsm_skip/test/.dscheck_conc_skip.eobjs/byte/dune__exe__Dscheck_conc_skip.cmi -no-alias-deps -opaque -open Dune__exe -o lib/lsm_skip/test/.dscheck_conc_skip.eobjs/native/dune__exe__Dscheck_conc_skip.cmx -c -impl lib/lsm_skip/test/dscheck_conc_skip.ml)
+$ (cd _build/default && /Users/kaushikmuthukumar/.opam/5.1.1/bin/ocamlopt.opt -w @1..3@5..28@31..39@43@46..47@49..57@61..62@67@69-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -o lib/lsm_skip/test/dscheck_conc_skip.exe /Users/kaushikmuthukumar/.opam/5.1.1/lib/base/base_internalhash_types/base_internalhash_types.cmxa -I /Users/kaushikmuthukumar/.opam/5.1.1/lib/base/base_internalhash_types /Users/kaushikmuthukumar/.opam/5.1.1/lib/sexplib0/sexplib0.cmxa /Users/kaushikmuthukumar/.opam/5.1.1/lib/base/shadow_stdlib/shadow_stdlib.cmxa /Users/kaushikmuthukumar/.opam/5.1.1/lib/ocaml_intrinsics_kernel/ocaml_intrinsics_kernel.cmxa -I /Users/kaushikmuthukumar/.opam/5.1.1/lib/ocaml_intrinsics_kernel /Users/kaushikmuthukumar/.opam/5.1.1/lib/base/base.cmxa -I /Users/kaushikmuthukumar/.opam/5.1.1/lib/base /Users/kaushikmuthukumar/.opam/5.1.1/lib/ocaml/unix/unix.cmxa /Users/kaushikmuthukumar/.opam/5.1.1/lib/ocaml/threads/threads.cmxa /Users/kaushikmuthukumar/.opam/5.1.1/lib/memtrace/memtrace.cmxa lib/lsm_skip/lsm_skip.cmxa /Users/kaushikmuthukumar/.opam/5.1.1/lib/either/either.cmxa /Users/kaushikmuthukumar/.opam/5.1.1/lib/containers/monomorphic/containers_monomorphic.cmxa /Users/kaushikmuthukumar/.opam/5.1.1/lib/containers/domain/containers_domain.cmxa /Users/kaushikmuthukumar/.opam/5.1.1/lib/containers/containers.cmxa /Users/kaushikmuthukumar/.opam/5.1.1/lib/oseq/oseq.cmxa /Users/kaushikmuthukumar/.opam/5.1.1/lib/dscheck/dscheck.cmxa lib/lsm_skip/test/.dscheck_conc_skip.eobjs/native/dune__exe.cmx lib/lsm_skip/test/.dscheck_conc_skip.eobjs/native/dune__exe__Dscheck_conc_skip.cmx)
