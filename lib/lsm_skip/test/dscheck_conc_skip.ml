@@ -17,4 +17,7 @@ let test_insert_remove_same_key_race () =
           && Cs.length t = List.length entries
           && List.for_all (fun (k, v) -> Cs.get t k = Some v) entries))
 
-let () = Dscheck.TracedAtomic.trace test_insert_remove_same_key_race
+let () =
+  Printf.printf "starting dscheck exploration...\n%!";
+  Dscheck.TracedAtomic.trace test_insert_remove_same_key_race;
+  Printf.printf "exploration finished\n%!"

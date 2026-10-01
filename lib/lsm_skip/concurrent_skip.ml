@@ -17,11 +17,23 @@ module type MUTEX = sig
   val unlock : t -> unit
 end
 
-module Make_spinlock (A : ATOMIC) : MUTEX = struct
+module Make_spinlock (A : ATOMIC) : MUTEX with type t = bool A.t = struct
   type t = bool A.t
   let create () = A.make false
-  let rec lock t =
-    if not (A.compare_and_set t false true) then lock t
+
+  exception Stuck_spinning
+
+  let max_attempts = 100_000
+
+  let lock t =
+    let acquired = ref false in
+    let attempts = ref 0 in
+    while (not !acquired) && !attempts < max_attempts do
+      acquired := A.compare_and_set t false true;
+      incr attempts
+    done;
+    if not !acquired then raise Stuck_spinning
+
   let unlock t = A.set t false
 end
 
